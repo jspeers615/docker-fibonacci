@@ -1,0 +1,24 @@
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t jspeers615/docker-fibonacci -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true jspeers615/docker-fibonacci npm test
+
+after_success:
+    - docker build -t jspeers615/multi-client ./client
+    - docker build -t jspeers615/multi-server ./server
+    - docker build -t jspeers615/multi-worker ./worker
+    - docker build -t jspeers615/multi-nginx ./nginx
+
+    # Log in to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+
+    # Take built images and upload to docker hub
+    - docker push jspeers615/multi-client 
+    - docker push jspeers615/multi-server 
+    - docker push jspeers615/multi-worker 
+    - docker push jspeers615/multi-nginx
