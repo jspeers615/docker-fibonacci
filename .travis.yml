@@ -22,3 +22,15 @@ after_success:
     - docker push jspeers615/multi-server 
     - docker push jspeers615/multi-worker 
     - docker push jspeers615/multi-nginx
+
+deploy:
+    provider: elasticbeanstalk
+    region: us-east-1
+    app: docker-fibonacci
+    env: DockerFibonacci-env
+    bucket_name: elasticbeanstalk-us-east-1-968202356836
+    bucket_path: docker-fibonacci
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
