@@ -14,17 +14,10 @@ function App() {
           <Link to="/">Home</Link>
           <Link to="/otherpage">Other Page</Link>
           <p>
-            Edit <code>src/App.js</code> and save to reload.
-            Hello world
+            Quack Quack
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <img src="https://www.collinsdictionary.com/images/full/duck_170690246.jpg?version=4.0.71" />
+          
           <div>
             <Route exact path="/" component={Fib} />
             <Route path="/otherpage" component={OtherPage} />
